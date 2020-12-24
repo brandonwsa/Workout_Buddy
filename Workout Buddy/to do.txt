@@ -1,0 +1,30 @@
+get apps created
+	need a users app to manage user login username(PK) and password
+	need Workout app
+	need Exercise app
+	need ExerciseDetails app
+	need main app
+	
+	
+make serializers
+make models
+
+check to see if we have to add anything to urls
+	added the code from django restful framework in urls.py, gotta see if we actually need some of it tho, like the serializer
+
+
+exercise table example: needs to be split up in different joinable tables
+
+User table:
+UName(pk)	UPassword
+
+Workout table:
+Date(pk)	WName
+
+Exercise table:
+Date(fk)(pk)	EName(pk)	SameWait(y/n)
+
+
+ExerciseDetails table:
+Date(fk)(pk)	EName(fk)(pk)	weight(pk)	setAmount	repAmount	volume
+
