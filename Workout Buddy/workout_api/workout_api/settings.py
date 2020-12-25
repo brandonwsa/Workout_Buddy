@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'users.apps.UsersConfig',
     'main.apps.MainConfig',
+    'workouts.apps.WorkoutsConfig',
 ]
 
 #Uncomment to allow all domains
@@ -143,7 +144,7 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 #redirect login
-LOGIN_REDIRECT_URL = 'register'
+LOGIN_REDIRECT_URL = 'home'
 
 #redirect to login screen when login_required
 LOGIN_URL = 'login'

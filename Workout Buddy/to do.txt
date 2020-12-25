@@ -4,10 +4,10 @@ get apps created
 	need Exercise app
 	need ExerciseDetails app
 	need main app
-	testing
 	
 make serializers
 make models
+figureout timezone
 
 check to see if we have to add anything to urls
 	added the code from django restful framework in urls.py, gotta see if we actually need some of it tho, like the serializer
@@ -40,7 +40,7 @@ UName(pk)	email				password1	password2
 brandon		brandon@gmail.com		hashed		hashed
 joe		joe@gmail.com			hashed		hashed
 
-Workout app table:
+Workouts app table:
 username(pk)	Date(pk)	WName
 brandon		12-2-20		fullbody1
 brandon		12-4-20		fullbody2
@@ -48,7 +48,7 @@ joe		12-4-20		pulls
 joe		12-5-20		push
 brandon		12-6-20		additional
 
-Exercise app table:
+Exercises app table:
 username(fk)(pk)	Date(fk)(pk)	EName(pk)	SameWait(y/n)	totalVolume
 brandon			12-2-20		benchpress	n		2940
 brandon			12-2-20		backsquat	n		.

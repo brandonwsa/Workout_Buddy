@@ -18,7 +18,7 @@ def register(request):
             #get username
             username = form.cleaned_data.get('username')
             #display a success message that the account was created for the username
-            messages.success(request, f'Account creted for {username}. You can now login!')
+            messages.success(request, f'Account created for {username}. You can now login!')
             #redirect user to given url.
             return redirect('login') #url name is name given in urlpatterns
             
