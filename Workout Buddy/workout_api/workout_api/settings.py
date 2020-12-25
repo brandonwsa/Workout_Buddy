@@ -141,3 +141,9 @@ STATIC_URL = '/static/'
 
 #set crispy form CSS to boostrap 4 style
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#redirect login
+LOGIN_REDIRECT_URL = 'register'
+
+#redirect to login screen when login_required
+LOGIN_URL = 'login'

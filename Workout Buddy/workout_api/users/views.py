@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 
+"""
+Registration functionality
+"""
 def register(request):
     #Check if entered information and grab it if so.
     if request.method == 'POST':
@@ -14,11 +18,17 @@ def register(request):
             #get username
             username = form.cleaned_data.get('username')
             #display a success message that the account was created for the username
-            messages.success(request, f'Account creted for {username}.')
+            messages.success(request, f'Account creted for {username}. You can now login!')
             #redirect user to given url.
-            return redirect('register') #url name is name given in urlpatterns
+            return redirect('login') #url name is name given in urlpatterns
             
     else:
         form = UserRegisterForm()
     
     return render(request, 'users/register.html', {'form': form})
+
+
+#decorator. Add functionality to profile from login_required
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')

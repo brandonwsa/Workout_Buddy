@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 #from django.contrib.auth.models import User
 #from rest_framework import routers, serializers, viewsets
 from users import views as user_views
+from main import views as main_views
 
 """
 # Serializers define the API representation.
@@ -41,6 +43,11 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
+    path('profile/', user_views.profile, name='profile'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('home/', main_views.home, name='home'),
+    path('about/', main_views.about, name='about'),
 #    path('', include(router.urls)),
 #    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

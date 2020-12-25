@@ -15,16 +15,64 @@ check to see if we have to add anything to urls
 
 exercise table example: needs to be split up in different joinable tables
 
-User table:
-UName(pk)	UPassword
+FOR MONOLITHIC APPROACH, will not be doing:
++ = pk		- = fk
 
-Workout table:
-Date(pk)	WName
+entities:
+user(username+, email, password1, password2)
+workout(WName+, Date+)
+exercise(EName+, Date+, weight+, sameWeight(y/n), sets, reps, volume)
 
-Exercise table:
-Date(fk)(pk)	EName(pk)	SameWait(y/n)
+relationships:
+belongs to - exercise to workout
+
+diagram:
+[workout]--N--{belongs to}--M--[exercise]
+
+tables:
+belongs to(WName+-, userName+-, EName+-, Date+-, weight+-)
+exercise(EName+, Date+, weight+, sameWeight(y/n), sets, reps, volume)
+
+FOR MICROSERVICE APPROACH, will be using:
+
+User app table:
+UName(pk)	email				password1	password2
+brandon		brandon@gmail.com		hashed		hashed
+joe		joe@gmail.com			hashed		hashed
+
+Workout app table:
+username(pk)	Date(pk)	WName
+brandon		12-2-20		fullbody1
+brandon		12-4-20		fullbody2
+joe		12-4-20		pulls
+joe		12-5-20		push
+brandon		12-6-20		additional
+
+Exercise app table:
+username(fk)(pk)	Date(fk)(pk)	EName(pk)	SameWait(y/n)	totalVolume
+brandon			12-2-20		benchpress	n		2940
+brandon			12-2-20		backsquat	n		.
+brandon			12-2-20		pullups		y		.
+brandon			12-2-20		hamstringcurls	y		.
+brandon			12-2-20		dragcurls	y		.
+brandon			12-2-20		facepulls	y		1260
+brandon			12-4-20		deadlift	n		.
+.			.		.		.		.
+joe			12-4-20		bentoverrow	n		4210
+joe			12-4-20		facepulls	y		.
+joe			12-4-20		armcurls	y		.
+joe			12-4-20		latpulldowns	n		.
+joe			12-4-20		deadlift	n		.
 
 
-ExerciseDetails table:
-Date(fk)(pk)	EName(fk)(pk)	weight(pk)	setAmount	repAmount	volume
-
+ExerciseDetails app table:
+username(fk)(pk)	Date(fk)(pk)	EName(fk)(pk)	weight(pk)	setAmount	totalReps	volume
+brandon			12-2-20		benchpress	110		1		10		1100
+brandon			12-2-20		benchpress	115		2		16		1840
+.			.		.		.		.		.		.
+brandon			12-2-20		facepulls	42		3		30		1260
+.			.		.		.		.		.		.
+joe			12-4-20		bentoverrow	135		1		10		1350
+joe			12-4-20		bentoverrow	185		1		8		1480
+joe			12-4-20		bentoverrow	230		1		6		1380
+.			.		.		.		.		.		.
