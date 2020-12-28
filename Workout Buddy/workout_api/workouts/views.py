@@ -69,6 +69,7 @@ class WorkoutsCreateView(LoginRequiredMixin, CreateView):
     model = Workouts
     fields = ['WName']
     success_url = '/home/' # redirect back to home page
+    
 
     #override form valid method and provide username
     def form_valid(self, form):

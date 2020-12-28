@@ -9,7 +9,16 @@ make serializers
 make models
 figureout timezone
 make functionalty of CRUD to workouts app - Mostly DONE
-get it so other users cant see others workouts but their own
+get it so other users cant see others workouts but their own - DONE
+replace WName in workout/new with Workout Name:
+make exercise app
+make CRUD for exercise app
+make exercisedetails app
+make CRUD for exervisedetails app
+
+Can either make a new workout for each entry of your day, or select existing workout and add exercises to it.
+	can order and get results by date if doing the later.
+
 
 check to see if we have to add anything to urls
 	added the code from django restful framework in urls.py, gotta see if we actually need some of it tho, like the serializer

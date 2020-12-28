@@ -3,15 +3,24 @@
 {% block content %}
     {% if user.is_authenticated %}
 
-        <!--Create a workout-->
-        <a class="btn btn-primary" href="{% url 'workouts-create' %}">Create a new workout</a>
+        <div class="content-title">
+            <h1>Welcome to Workout Buddy!</h1>
+            <br />
+            <h2>What would you like to do?</h2>
+        </div>
 
-        {% for workout in workouts %}
-            <h2>{{ workout.id }}</h2>
-            <h2>{{ workout.username }}</h2>
-            <h2>{{ workout.WName }}</h2>
-            <h2>{{ workout.date|date:"m d, Y" }}</h2>
-        {% endfor %}
+        <div class="content-section">
+            <!--Create a workout-->
+            <h3>Create a new workout plan:</h3>
+            <a class="btn btn-primary" href="{% url 'workouts-create' %}">Create a new workout</a>
+        </div>
+
+        <div class="content-section">
+            <!--Add exercises to existing workout-->
+            <h3>Add your exercise results to an existing workout plan:</h3>
+            <a class="btn btn-primary" href="{% url 'workouts-create' %}">Add results to workout</a>
+        </div>
+
     {% else %}
         <h2>Login to view or edit your workouts</h2>
         <a href="{% url 'login' %}">Login</a>
