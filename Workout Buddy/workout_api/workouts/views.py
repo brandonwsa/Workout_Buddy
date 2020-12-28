@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 from .models import Workouts
 from django.views.generic import (
     ListView, 
@@ -16,8 +18,13 @@ Or have it be the default view of displaying workouts in the workouts.html in wo
 Usually this is done by calling from your controller class views.py, in this case, main.views calls this w/ custom url
 """
 def workouts(request, url=None):
+    #query to get only the current users workouts
+    querySet = Workouts.objects.filter(
+        username = request.user
+    )
+
     context = {
-        'workouts' : Workouts.objects.all()
+        'workouts' : querySet
     }
 
     #checks to see if url was provided.
@@ -31,17 +38,28 @@ def workouts(request, url=None):
 List view class to display workouts as a list organized based on date.
 """
 class WorkoutsListView(ListView):
-    model = Workouts
     template_name = 'workouts/workouts.html'
     context_object_name = 'workouts'
-    ordering = ['-date'] #order based on newest to oldest.
+
+    #override queryset method from ListView to get signed in users workouts only
+    def get_queryset(self):
+        queryset = Workouts.objects.filter(username=self.request.user)
+        return queryset.order_by('-date') #order by newest date to oldest.
 
 
 """
 Detailed list view of workouts
 """
-class WorkoutsDetailView(DetailView):
+class WorkoutsDetailView(UserPassesTestMixin, DetailView):
     model = Workouts
+
+    # see if user trying to view workout details is user logged in.
+    def test_func(self):
+        workout = self.get_object()
+        if self.request.user == workout.username:
+            return True
+        else:
+            return False
 
 
 """
@@ -75,7 +93,7 @@ class WorkoutsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
 
 
-    # see if user trying to update post is user logged in.
+    # see if user trying to update workout is user logged in.
     def test_func(self):
         workout = self.get_object()
         if self.request.user == workout.username:
@@ -92,7 +110,7 @@ class WorkoutsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Workouts
     success_url = '/workouts/'
     
-    # see if user trying to update post is user logged in.
+    # see if user trying to delete workout is user logged in.
     def test_func(self):
         workout = self.get_object()
         if self.request.user == workout.username:
