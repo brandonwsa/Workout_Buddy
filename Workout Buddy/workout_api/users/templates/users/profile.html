@@ -1,5 +1,8 @@
 {% extends "main/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>{{ user.username }}</h1>
+    <h1>Hello {{ user.username }}</h1>
+    <br />
+    <h2>Your workouts:</h2>
+    <a class="btn btn-primary" href="{% url 'workouts' %}">View workouts</a>
 {% endblock content %}

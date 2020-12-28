@@ -2,7 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
     {% if user.is_authenticated %}
+
+        <!--Create a workout-->
+        <a class="btn btn-primary" href="{% url 'workouts-create' %}">Create a new workout</a>
+
         {% for workout in workouts %}
+            <h2>{{ workout.id }}</h2>
             <h2>{{ workout.username }}</h2>
             <h2>{{ workout.WName }}</h2>
             <h2>{{ workout.date|date:"m d, Y" }}</h2>

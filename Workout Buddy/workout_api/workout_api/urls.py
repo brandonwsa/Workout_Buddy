@@ -20,6 +20,14 @@ from django.contrib.auth import views as auth_views
 #from rest_framework import routers, serializers, viewsets
 from users import views as user_views
 from main import views as main_views
+from workouts import views as workouts_views
+from workouts.views import (
+    WorkoutsListView, 
+    WorkoutsDetailView, 
+    WorkoutsCreateView,
+    WorkoutsUpdateView,
+    WorkoutsDeleteView
+)
 
 """
 # Serializers define the API representation.
@@ -47,7 +55,13 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('home/', main_views.home, name='home'),
+    path('', main_views.home),
     path('about/', main_views.about, name='about'),
+    path('workouts/', WorkoutsListView.as_view(), name='workouts'),
+    path('workouts/<int:pk>/', WorkoutsDetailView.as_view(), name='workouts-detail'),
+    path('workouts/new/', WorkoutsCreateView.as_view(), name='workouts-create'), #workouts_form.html is naming convention
+    path('workouts/<int:pk>/update/', WorkoutsUpdateView.as_view(), name='workouts-update'), #auto routes to workouts_form
+    path('workouts/<int:pk>/delete/', WorkoutsDeleteView.as_view(), name='workouts-delete'),
 #    path('', include(router.urls)),
 #    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

@@ -8,6 +8,8 @@ get apps created
 make serializers
 make models
 figureout timezone
+make functionalty of CRUD to workouts app - Mostly DONE
+get it so other users cant see others workouts but their own
 
 check to see if we have to add anything to urls
 	added the code from django restful framework in urls.py, gotta see if we actually need some of it tho, like the serializer
