@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from rest_framework import viewsets #for workoutsViewSet
 from .models import Workouts
+from .serializers import WorkoutsSerializer #for workoutsViewSet
 from django.views.generic import (
     ListView, 
     DetailView,
@@ -32,6 +34,15 @@ def workouts(request, url=None):
         return render(request, url, context)
     else:
         return render(request, 'workouts/workouts.html', context)
+
+
+"""
+Rest framework api for workouts. Will display workouts in json using GET and provide a way to view the options for the objects.
+"""
+class WorkoutsViewSet(viewsets.ModelViewSet):
+    queryset = Workouts.objects.all()
+    serializer_class = WorkoutsSerializer
+
 
 
 """
@@ -68,7 +79,7 @@ The create workout view with authorization check
 class WorkoutsCreateView(LoginRequiredMixin, CreateView):
     model = Workouts
     fields = ['WName']
-    success_url = '/home/' # redirect back to home page
+    success_url = '/' # redirect back to home page
     
 
     #override form valid method and provide username

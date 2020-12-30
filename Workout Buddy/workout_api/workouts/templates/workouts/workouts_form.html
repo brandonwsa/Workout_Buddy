@@ -10,6 +10,14 @@
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Create</button>
+                
+                <!--Check if creating a new workout, or updating one. If updating one, the back button will be redirecting user to the workout details.
+                If creating a completely new workout, the back button will redirect the user back to the home page.-->
+                {% if object is None %}
+                    <a class="btn btn-secondary" href="{% url 'home' %}">Back to home</a>
+                {% else %}
+                    <a class="btn btn-secondary" href="{% url 'workouts-detail' object.id %}">Back to details</a>
+                {% endif %}
             </div>
         </form>
 

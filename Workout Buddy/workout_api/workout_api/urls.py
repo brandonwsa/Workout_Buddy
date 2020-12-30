@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-#from django.contrib.auth.models import User
-#from rest_framework import routers, serializers, viewsets
+from django.contrib.auth.models import User #for restapi framework
+from rest_framework import routers, serializers, viewsets #for restapi framework
 from users import views as user_views
 from main import views as main_views
 from workouts import views as workouts_views
@@ -29,22 +29,12 @@ from workouts.views import (
     WorkoutsDeleteView
 )
 
-"""
-# Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'is_staff']
 
-# ViewSets define the view behavior.
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-# Routers provide an easy way of automatically determining the URL conf.
+# router for the rest api to be displayed.
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
-"""
+router.register(r'users', user_views.UserViewSet)
+router.register(r'workouts', workouts_views.WorkoutsViewSet)
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -54,14 +44,16 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-    path('home/', main_views.home, name='home'),
-    path('', main_views.home),
+    #path('home/', main_views.home, name='home'),
+    path('', main_views.home, name='home'),
     path('about/', main_views.about, name='about'),
+    path('contact/', main_views.contact, name='contact'),
     path('workouts/', WorkoutsListView.as_view(), name='workouts'),
     path('workouts/<int:pk>/', WorkoutsDetailView.as_view(), name='workouts-detail'),
     path('workouts/new/', WorkoutsCreateView.as_view(), name='workouts-create'), #workouts_form.html is naming convention
     path('workouts/<int:pk>/update/', WorkoutsUpdateView.as_view(), name='workouts-update'), #auto routes to workouts_form
     path('workouts/<int:pk>/delete/', WorkoutsDeleteView.as_view(), name='workouts-delete'),
-#    path('', include(router.urls)),
-#    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+ #   path('api/', include(router.urls)), #commented out cause causing an issue where user is directed to api page for workout details when clicking their workout to view its details. Should be happening.
+ #   path('api-auth/', include('rest_framework.urls', namespace='rest_framework')), #commented out cause causing an issue where user is directed to api page for workout details when clicking their workout to view its details. Should be happening.
 ]
+

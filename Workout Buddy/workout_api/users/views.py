@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from django.contrib.auth.models import User
+from .serializers import UserSerializer
 from .forms import UserRegisterForm
+
+
 
 """
 Registration functionality
@@ -32,3 +37,12 @@ def register(request):
 @login_required
 def profile(request):
     return render(request, 'users/profile.html')
+
+
+
+"""
+Rest framework api for users. Will display users in json using GET and provide a way to view the options for the objects.
+"""
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
