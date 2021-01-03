@@ -11,15 +11,26 @@ figureout timezone
 make functionalty of CRUD to workouts app - DONE for website functionality
 get it so other users cant see others workouts but their own - DONE
 replace WName in workout/new with 'Workout Name:'
-Make API page functionality - DONE
+Make API page functionality - OPEN FOR FIXING
+	See KNWON ISSUES below
 make api for workouts - DONE
+make workouts forms.py
 make exercise app
+Get date to be autofilled in when creating exercise when coming from workout/new page or coming from workout/update page
+When doing the 'add your results to an existing workout plan' on home page, make it have you either select an existing workout
+	to edit and go from there to adding exercises, or have it redirect you to your workouts page where you can see
+	all your workouts and select one
+Should also have workout name be included in exercises table as well.
+Make a visual display for user to see their exercises being added to table in exercises/new
 make CRUD for exercise app
 make exercisedetails app
 make CRUD for exervisedetails app
 Create custom API urls with slugs
 Create back to home button on API page
 add try excepts
+
+POSSIBLE ISSUES:
+	we are able to make a duplicate exercise with same name and date and checkbox cause of id being pk in Exercises
 
 KNOWN ISSUES:
 when including router urls to patternurls for api functionality to be used, when clicking on a workout to view its details
@@ -53,6 +64,10 @@ tables:
 belongs to(WName+-, userName+-, EName+-, Date+-, weight+-)
 exercise(EName+, Date+, weight+, sameWeight(y/n), sets, reps, volume)
 
+Make user enter in date for their workout, then carry that data into exercises table view autofilling field with date
+from corresponding workout.. Will know what workout because will be coming from creating a new a new one or a workout page
+
+
 FOR MICROSERVICE APPROACH, will be using:
 
 User app table:
@@ -69,20 +84,20 @@ joe		12-5-20		push
 brandon		12-6-20		additional
 
 Exercises app table:
-username(fk)(pk)	Date(fk)(pk)	EName(pk)	SameWait(y/n)	totalVolume
-brandon			12-2-20		benchpress	n		2940
-brandon			12-2-20		backsquat	n		.
-brandon			12-2-20		pullups		y		.
-brandon			12-2-20		hamstringcurls	y		.
-brandon			12-2-20		dragcurls	y		.
-brandon			12-2-20		facepulls	y		1260
-brandon			12-4-20		deadlift	n		.
+username(fk)(pk)	Date(fk)(pk)	exercise(pk)	SameWeight(y/n)	totalVolume
+brandon			12-2-20		benchpress	no		2940
+brandon			12-2-20		backsquat	no		.
+brandon			12-2-20		pullups		yes		.
+brandon			12-2-20		hamstringcurls	yes		.
+brandon			12-2-20		dragcurls	yes		.
+brandon			12-2-20		facepulls	yes		1260
+brandon			12-4-20		deadlift	no		.
 .			.		.		.		.
-joe			12-4-20		bentoverrow	n		4210
-joe			12-4-20		facepulls	y		.
-joe			12-4-20		armcurls	y		.
-joe			12-4-20		latpulldowns	n		.
-joe			12-4-20		deadlift	n		.
+joe			12-4-20		bentoverrow	no		4210
+joe			12-4-20		facepulls	yes		.
+joe			12-4-20		armcurls	yes		.
+joe			12-4-20		latpulldowns	no		.
+joe			12-4-20		deadlift	no		.
 
 
 ExerciseDetails app table:

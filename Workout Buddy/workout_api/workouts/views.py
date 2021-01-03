@@ -78,8 +78,8 @@ The create workout view with authorization check
 """
 class WorkoutsCreateView(LoginRequiredMixin, CreateView):
     model = Workouts
-    fields = ['WName']
-    success_url = '/' # redirect back to home page
+    fields = ['WName', 'date']
+    success_url = '/exercises/new' # redirect to add exercises
     
 
     #override form valid method and provide username
@@ -95,7 +95,7 @@ The update view with authorization check
 """
 class WorkoutsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Workouts
-    fields = ['WName']
+    fields = ['WName', 'date']
     success_url = '/home/' # redirect back to home page
 
     #override form valid method and provide username

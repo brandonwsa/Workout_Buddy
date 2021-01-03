@@ -28,6 +28,9 @@ from workouts.views import (
     WorkoutsUpdateView,
     WorkoutsDeleteView
 )
+from exercises.views import (
+    ExercisesCreateView
+)
 
 
 # router for the rest api to be displayed.
@@ -53,6 +56,7 @@ urlpatterns = [
     path('workouts/new/', WorkoutsCreateView.as_view(), name='workouts-create'), #workouts_form.html is naming convention
     path('workouts/<int:pk>/update/', WorkoutsUpdateView.as_view(), name='workouts-update'), #auto routes to workouts_form
     path('workouts/<int:pk>/delete/', WorkoutsDeleteView.as_view(), name='workouts-delete'),
+    path('exercises/new/', ExercisesCreateView.as_view(), name='exercises-create'), #exercises_form.html is naming convention
  #   path('api/', include(router.urls)), #commented out cause causing an issue where user is directed to api page for workout details when clicking their workout to view its details. Should be happening.
  #   path('api-auth/', include('rest_framework.urls', namespace='rest_framework')), #commented out cause causing an issue where user is directed to api page for workout details when clicking their workout to view its details. Should be happening.
 ]

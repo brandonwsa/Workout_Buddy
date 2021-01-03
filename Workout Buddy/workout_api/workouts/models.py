@@ -1,12 +1,11 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
 class Workouts(models.Model):
     #django will auto generate a primary key id.
     username = models.ForeignKey(User, on_delete=models.CASCADE) #delete workouts if user is deleted.
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateField()
     WName = models.CharField(max_length=50)
 
     def __str__(self):
