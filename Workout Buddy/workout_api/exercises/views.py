@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-#from rest_framework import viewsets
-#from .serializers import UserSerializer
+from rest_framework import viewsets
+from .serializers import ExercisesSerializer
 from .forms import ExercisesForm
+from .models import Exercises
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView, 
@@ -12,6 +13,21 @@ from django.views.generic import (
     DeleteView
 )
 
+
+
+
+"""
+Rest framework api for exercises. Will display exercises in json using GET and provide a way to view the options for the objects.
+"""
+class ExercisesViewSet(viewsets.ModelViewSet):
+   # queryset = Exercises.objects.all()
+    serializer_class = ExercisesSerializer
+
+    #defining out own get_queryset method allows us to set a custom basename when routing.
+    #This helps us seperate the API view from accidently popping up when user clicks to view their
+    #workout from their profile in the UI.
+    def get_queryset(self):
+        return Exercises.objects.all()
 
 
 """

@@ -28,6 +28,7 @@ from workouts.views import (
     WorkoutsUpdateView,
     WorkoutsDeleteView
 )
+from exercises import views as exercises_views
 from exercises.views import (
     ExercisesCreateView
 )
@@ -36,7 +37,10 @@ from exercises.views import (
 # router for the rest api to be displayed.
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
-router.register(r'workouts', workouts_views.WorkoutsViewSet)
+router.register(r'workouts_api', workouts_views.WorkoutsViewSet, basename='workouts_api') #having basename='workouts_api' instead of 'workouts' allows user to not be redirected to api page
+                                                                                          #when clicking on their workout they want to view. This seperates the API view (which user shouldnt have access to) 
+                                                                                          #from UI view.
+router.register(r'exercises_api', exercises_views.ExercisesViewSet, basename='exercises_api')
 
 
 # Wire up our API using automatic URL routing.
@@ -57,7 +61,7 @@ urlpatterns = [
     path('workouts/<int:pk>/update/', WorkoutsUpdateView.as_view(), name='workouts-update'), #auto routes to workouts_form
     path('workouts/<int:pk>/delete/', WorkoutsDeleteView.as_view(), name='workouts-delete'),
     path('exercises/new/', ExercisesCreateView.as_view(), name='exercises-create'), #exercises_form.html is naming convention
- #   path('api/', include(router.urls)), #commented out cause causing an issue where user is directed to api page for workout details when clicking their workout to view its details. Should be happening.
- #   path('api-auth/', include('rest_framework.urls', namespace='rest_framework')), #commented out cause causing an issue where user is directed to api page for workout details when clicking their workout to view its details. Should be happening.
+    path('api/', include(router.urls)), 
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 

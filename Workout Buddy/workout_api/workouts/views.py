@@ -40,8 +40,14 @@ def workouts(request, url=None):
 Rest framework api for workouts. Will display workouts in json using GET and provide a way to view the options for the objects.
 """
 class WorkoutsViewSet(viewsets.ModelViewSet):
-    queryset = Workouts.objects.all()
+   # queryset = Workouts.objects.all()
     serializer_class = WorkoutsSerializer
+
+    #defining out own get_queryset method allows us to set a custom basename when routing.
+    #This helps us seperate the API view from accidently popping up when user clicks to view their
+    #workout from their profile in the UI.
+    def get_queryset(self):
+        return Workouts.objects.all()
 
 
 

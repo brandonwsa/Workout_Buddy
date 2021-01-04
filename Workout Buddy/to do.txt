@@ -11,8 +11,8 @@ figureout timezone
 make functionalty of CRUD to workouts app - DONE for website functionality
 get it so other users cant see others workouts but their own - DONE
 replace WName in workout/new with 'Workout Name:'
-Make API page functionality - OPEN FOR FIXING
-	See KNWON ISSUES below
+Make API page for workouts functionality - DONE
+	See KNWON ISSUES below - FIXED
 make api for workouts - DONE
 make workouts forms.py
 make exercise app
@@ -33,7 +33,7 @@ POSSIBLE ISSUES:
 	we are able to make a duplicate exercise with same name and date and checkbox cause of id being pk in Exercises
 
 KNOWN ISSUES:
-when including router urls to patternurls for api functionality to be used, when clicking on a workout to view its details
+FIXED - when including router urls to patternurls for api functionality to be used, when clicking on a workout to view its details
 	the user is directed to the api page for the workout details instead.
 
 Can either make a new workout for each entry of your day, or select existing workout and add exercises to it.
