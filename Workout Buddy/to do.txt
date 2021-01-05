@@ -14,8 +14,10 @@ replace WName in workout/new with 'Workout Name:'
 Make API page for workouts functionality - DONE
 	See KNWON ISSUES below - FIXED
 make api for workouts - DONE
-make workouts forms.py
+make workouts forms.py - DONE
 make exercise app
+get exercises to appear for a specific workout - DONE
+make API for exercise app - DONE
 Get date to be autofilled in when creating exercise when coming from workout/new page or coming from workout/update page
 When doing the 'add your results to an existing workout plan' on home page, make it have you either select an existing workout
 	to edit and go from there to adding exercises, or have it redirect you to your workouts page where you can see
@@ -23,6 +25,7 @@ When doing the 'add your results to an existing workout plan' on home page, make
 Should also have workout name be included in exercises table as well.
 Make a visual display for user to see their exercises being added to table in exercises/new
 make CRUD for exercise app
+When deleting workout, delete all exercises associated with it. Need to CASCAD a WID in exercise model possibly for this
 make exercisedetails app
 make CRUD for exervisedetails app
 Create custom API urls with slugs
@@ -66,6 +69,33 @@ exercise(EName+, Date+, weight+, sameWeight(y/n), sets, reps, volume)
 
 Make user enter in date for their workout, then carry that data into exercises table view autofilling field with date
 from corresponding workout.. Will know what workout because will be coming from creating a new a new one or a workout page
+
+COULD potentially make another database app that would hold workout IDs that are associated with Exercises.
+	this database could be in main app. model would be called: ExercisesInWorkouts where a many-to-one relation
+	would exist. Many exercise ID's could belong to one workout ID. Exercise ID's may also be different even if
+	the exercise is the same name, as the new exercise added is from a different day. This new exercise would
+	still be mapped to the Workout ID. Can get specific exercises done a partical day based on looking at the date
+	you want the list of exercises from. These exercises will be mapped to a specific workout ID when user adds
+	the new/updated exercises to the workout. This can be done by grabbing the Workout ID from the url as that is
+	the PK. Simply then set the WID in Exercises model to that PK.
+
+	Doing this approach ensures that no accidental data will appear as we are currently displaying exercises
+	associated with workouts based on date and the user that is logged in. This is problematic because if the user
+	does multiple workouts in a day and logs them, then all the exercises from those workouts will appear when the user
+	only wants to view the exercises in one of the workouts they did that day.
+
+	This ExercisesInWorkouts model will need to havbe its fields filled in when the user fully enters in all their
+	exercises in their workout. The user will not have any CRUD access to this database as this database is for
+	behind the scenes.
+	
+	To get this to work, have a confirm.html file in the main app. This page will ask the user to confirm their entries
+	and once they hit confirm, where workout is equal to the pk in url, put workout id pk in ExercisesInWorkouts model, 
+	get the date and find date in exercises
+	model that matches user. Add exercises id to ExercisesInWorkouts model. If the id exists, will not add exercise
+	**This is still just a theory in progress**
+
+	Or just use workout pk as a foreignkey in exercises model.
+
 
 
 FOR MICROSERVICE APPROACH, will be using:

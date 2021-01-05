@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from rest_framework import viewsets #for workoutsViewSet
 from .models import Workouts
 from .serializers import WorkoutsSerializer #for workoutsViewSet
+from .forms import WorkoutsForm
 from django.views.generic import (
     ListView, 
     DetailView,
@@ -83,8 +84,8 @@ class WorkoutsDetailView(UserPassesTestMixin, DetailView):
 The create workout view with authorization check
 """
 class WorkoutsCreateView(LoginRequiredMixin, CreateView):
-    model = Workouts
-    fields = ['WName', 'date']
+    form_class = WorkoutsForm
+    template_name = 'workouts/workouts_form.html'
     success_url = '/exercises/new' # redirect to add exercises
     
 

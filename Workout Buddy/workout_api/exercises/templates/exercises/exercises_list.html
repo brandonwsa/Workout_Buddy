@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+    <h1>Your most recent exercises: </h1> 
+    <a class="btn btn-secondary" href="{% url 'workouts' %}">Back to your workouts</a>
+    <br />
+
+        {% for exercise in exercises %}
+            <h2>{{ exercise.exercise }}</h2>
+            <h2>{{ exercise.date|date:"m d, Y" }}</h2>
+            <h2>Same weight? {{ exercise.sameWeight }}</h2>
+            <h2>Volume: {{ exercise.totalVolume }}</h2>
+            <br />
+            <!-- add link to list of exercises per workout here -->
+        {% endfor %}
+
+    {% else %}
+        <h2>Login to view or edit your workouts</h2>
+        <a href="{% url 'login' %}">Login</a>
+        <br />
+        <h2>Or register if you don't have an account to log into</h2>
+        <a href="{% url 'register' %}">Register now!</a>   
+    {% endif %}
+
+{% endblock content %}

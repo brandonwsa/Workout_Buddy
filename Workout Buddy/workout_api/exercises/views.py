@@ -30,6 +30,20 @@ class ExercisesViewSet(viewsets.ModelViewSet):
         return Exercises.objects.all()
 
 
+
+"""
+List view class to display exercises as a list organized based on date for a specific workout.
+"""
+class ExercisesListView(ListView):
+    template_name = 'exercises/exercises.html'
+    context_object_name = 'exercises'
+
+    #override queryset method from ListView to get signed in users exercises only
+    def get_queryset(self):
+        queryset = Exercises.objects.filter(username=self.request.user)
+        return queryset.order_by('-date') #order by newest date to oldest.
+
+
 """
 Exercises creation functionality
 """
@@ -45,24 +59,4 @@ class ExercisesCreateView(LoginRequiredMixin, CreateView):
         #see if form is valid, have to do again since overriding.
         return super().form_valid(form)
 
-    """
-    #Check if entered information and grab it if so.
-    if request.method == 'POST':
-        form = ExercisesForm(request.POST)
 
-        #see if form is valid entries
-        if form.is_valid():
-            #save exercise
-            form.save()
-            #get username
-            username = form.cleaned_data.get('username')
-            #display a success message that the exercise was created for the username
-            messages.success(request, f'Exercises created for {username}!')
-            #redirect user to given url.
-            return redirect('login') #url name is name given in urlpatterns
-                            #will be exercises detail url
-       """     
-#    else:
-#        form = ExercisesForm()
-    
- #   return render(request, 'exercises/exercises_form.html', {'form': form})

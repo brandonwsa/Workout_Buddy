@@ -14,6 +14,8 @@
         <br />
 
         {% if object.username == user %}
+            <a class="btn btn-primary mt-1 mb-1" href="{% url 'workout-exercises' object.id %}">View Exercises</a>
+            <br />
             <a class="btn btn-secondary mt-1 mb-1" href="{% url 'workouts-update' object.id %}">Update workout</a>
             <a class="btn btn-outline-danger" href="{% url 'workouts-delete' object.id %}">Delete workout</a>
         {% endif %}

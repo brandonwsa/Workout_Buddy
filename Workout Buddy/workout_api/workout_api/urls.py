@@ -22,7 +22,7 @@ from users import views as user_views
 from main import views as main_views
 from workouts import views as workouts_views
 from workouts.views import (
-    WorkoutsListView, 
+    WorkoutsListView,
     WorkoutsDetailView, 
     WorkoutsCreateView,
     WorkoutsUpdateView,
@@ -60,6 +60,7 @@ urlpatterns = [
     path('workouts/new/', WorkoutsCreateView.as_view(), name='workouts-create'), #workouts_form.html is naming convention
     path('workouts/<int:pk>/update/', WorkoutsUpdateView.as_view(), name='workouts-update'), #auto routes to workouts_form
     path('workouts/<int:pk>/delete/', WorkoutsDeleteView.as_view(), name='workouts-delete'),
+    path('workouts/<int:pk>/exercises/', main_views.WorkoutExercisesListView.as_view(), name='workout-exercises'), #use view from exercises.
     path('exercises/new/', ExercisesCreateView.as_view(), name='exercises-create'), #exercises_form.html is naming convention
     path('api/', include(router.urls)), 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
