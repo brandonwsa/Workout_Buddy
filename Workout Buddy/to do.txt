@@ -95,6 +95,12 @@ COULD potentially make another database app that would hold workout IDs that are
 	**This is still just a theory in progress**
 
 	Or just use workout pk as a foreignkey in exercises model.
+	^ use this if we continue to use only one database for project, SQLite
+	can probably just get the exercises based of of the workout PK if we make a fk in exercises table from workouts id. 
+	Wont need username info. Can get exercisesdetails for a specific exercise if we also make an exercise id fk in
+	exerciseDetails. Should keep dates in all the tables, but wont need username since id's are enough uniqueness.
+	Basically only way user will have access to an id is if it their own. Will have to check user associated with workout
+	This may cause too much complications with currect system.
 
 
 
@@ -106,28 +112,28 @@ brandon		brandon@gmail.com		hashed		hashed
 joe		joe@gmail.com			hashed		hashed
 
 Workouts app table:
-username(pk)	Date(pk)	WName
-brandon		12-2-20		fullbody1
-brandon		12-4-20		fullbody2
-joe		12-4-20		pulls
-joe		12-5-20		push
-brandon		12-6-20		additional
+id(pk)	username(fk)	Date		WName
+1	brandon		12-2-20		fullbody1
+2	brandon		12-4-20		fullbody2
+3	joe		12-4-20		pulls
+4	joe		12-5-20		push
+5	brandon		12-6-20		additional
 
 Exercises app table:
-username(fk)(pk)	Date(fk)(pk)	exercise(pk)	SameWeight(y/n)	totalVolume
-brandon			12-2-20		benchpress	no		2940
-brandon			12-2-20		backsquat	no		.
-brandon			12-2-20		pullups		yes		.
-brandon			12-2-20		hamstringcurls	yes		.
-brandon			12-2-20		dragcurls	yes		.
-brandon			12-2-20		facepulls	yes		1260
-brandon			12-4-20		deadlift	no		.
-.			.		.		.		.
-joe			12-4-20		bentoverrow	no		4210
-joe			12-4-20		facepulls	yes		.
-joe			12-4-20		armcurls	yes		.
-joe			12-4-20		latpulldowns	no		.
-joe			12-4-20		deadlift	no		.
+id(pk)	username(fk)		Date		exercise	SameWeight(y/n)	totalVolume
+1	brandon			12-2-20		benchpress	no		2940
+2	brandon			12-2-20		backsquat	no		.
+3	brandon			12-2-20		pullups		yes		.
+4	brandon			12-2-20		hamstringcurls	yes		.
+5	brandon			12-2-20		dragcurls	yes		.
+6	brandon			12-2-20		facepulls	yes		1260
+7	brandon			12-4-20		deadlift	no		.
+8	.			.		.		.		.
+9	joe			12-4-20		bentoverrow	no		4210
+10	joe			12-4-20		facepulls	yes		.
+11	joe			12-4-20		armcurls	yes		.
+12	joe			12-4-20		latpulldowns	no		.
+13	joe			12-4-20		deadlift	no		.
 
 
 ExerciseDetails app table:
@@ -141,3 +147,35 @@ joe			12-4-20		bentoverrow	135		1		10		1350
 joe			12-4-20		bentoverrow	185		1		8		1480
 joe			12-4-20		bentoverrow	230		1		6		1380
 .			.		.		.		.		.		.
+
+can probably just get the exercises based of of the workout PK if we make a fk in exercises table from workouts id. 
+Wont need username info.
+--revised
+Exercises app table:
+id(pk)	wID(fk)		date		exercise	SameWeight(y/n)	totalVolume
+1	1		12-2-20		benchpress	no		2940
+2	1		12-2-20		backsquat	no		.
+3	1		12-2-20		pullups		yes		.
+4	1		12-2-20		hamstringcurls	yes		.
+5	1		12-2-20		dragcurls	yes		.
+6	1		12-2-20		facepulls	yes		1260
+7	2		12-4-20		deadlift	no		.
+.	.		.		.		.		.
+9	3		12-4-20		bentoverrow	no		4210
+10	3		12-4-20		facepulls	yes		.
+11	3		12-4-20		armcurls	yes		.
+12	3		12-4-20		latpulldowns	no		.
+13	3		12-4-20		deadlift	no		.
+
+
+ExerciseDetails app table:
+id(pk)	eID(fk)	username(fk)		Date		EName		weight		setAmount	totalReps	volume
+1	1	brandon			12-2-20		benchpress	110		1		10		1100
+2	1	brandon			12-2-20		benchpress	115		2		16		1840
+.	.	.			.		.		.		.		.		.
+4	6	brandon			12-2-20		facepulls	42		3		30		1260
+.	.	.			.		.		.		.		.		.
+6	9	joe			12-4-20		bentoverrow	135		1		10		1350
+7	9	joe			12-4-20		bentoverrow	185		1		8		1480
+8	9	joe			12-4-20		bentoverrow	230		1		6		1380
+.	.	.			.		.		.		.		.		.

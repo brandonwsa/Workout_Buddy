@@ -33,6 +33,7 @@ class WorkoutExercisesListView(ListView):
         #get the workout associated with that pk
         workout = Workouts.objects.get(pk=workoutpk)
         #get query that is the exercises that are from that workout, based on date and current user.
+        # can probably just get the exercises based of of the workout PK if we make a fk in exercises table from workouts id. Wont need username info.
         queryset = Exercises.objects.filter(username=self.request.user, date=workout.date)
         return queryset.order_by('-date') #order by newest date to oldest.
 
