@@ -30,7 +30,7 @@ make exercisedetails app
 make CRUD for exervisedetails app
 Create custom API urls with slugs
 Create back to home button on API page
-add try excepts
+add try excepts, be sure to add logs when doing this
 
 POSSIBLE ISSUES:
 	we are able to make a duplicate exercise with same name and date and checkbox cause of id being pk in Exercises

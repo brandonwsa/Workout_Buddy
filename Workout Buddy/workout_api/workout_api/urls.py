@@ -61,7 +61,8 @@ urlpatterns = [
     path('workouts/<int:pk>/update/', WorkoutsUpdateView.as_view(), name='workouts-update'), #auto routes to workouts_form
     path('workouts/<int:pk>/delete/', WorkoutsDeleteView.as_view(), name='workouts-delete'),
     path('workouts/<int:pk>/exercises/', main_views.WorkoutExercisesListView.as_view(), name='workout-exercises'), #use view from exercises.
-    path('exercises/new/', ExercisesCreateView.as_view(), name='exercises-create'), #exercises_form.html is naming convention
+#    path('exercises/new/', ExercisesCreateView.as_view(), name='exercises-create'), #exercises_form.html is naming convention
+    path('workouts/<int:pk>/exercises/new/', ExercisesCreateView.as_view(), name='exercises-add'), #exercises_form.html is naming convention
     path('api/', include(router.urls)), 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

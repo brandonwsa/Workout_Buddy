@@ -14,19 +14,17 @@ class ExercisesForm(forms.ModelForm):
         #model that will be affected.
         model = Exercises
         #order in which we want the input fields to be in.
-        fields = ['exercise', 'date', 'sameWeight']
+        fields = ['exercise', 'sameWeight']
 
         #custom labels
         labels = {
             "exercise": _('Exercise Name'),
-            "date": _('Date (YYYY-MM-DD)'),
             "sameWeight": _('Same Weight?'),
         }
 
         #custom help text
         help_texts = {
             "exercise": _('Enter the exercise name'),
-            "date": _('What day did you do the exercise on?'),
             "sameWeight": _('Did you use the same weight for all the sets? Check the box if you did.'),
         }
 

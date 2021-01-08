@@ -4,4 +4,4 @@ from .models import Exercises
 class ExercisesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Exercises
-        fields = ['id', 'username', 'date', 'exercise', 'sameWeight', 'totalVolume']
+        fields = ['id', 'workout_id', 'date', 'exercise', 'sameWeight', 'totalVolume']
