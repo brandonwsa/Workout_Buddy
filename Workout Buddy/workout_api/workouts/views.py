@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.urls import reverse_lazy
 from rest_framework import viewsets #for workoutsViewSet
 from .models import Workouts
 from .serializers import WorkoutsSerializer #for workoutsViewSet
@@ -86,8 +87,10 @@ The create workout view with authorization check
 class WorkoutsCreateView(LoginRequiredMixin, CreateView):
     form_class = WorkoutsForm
     template_name = 'workouts/workouts_form.html'
-    success_url = '/exercises/new' # redirect to add exercises
     
+    #redirect user to add exercises to the workout when user creates workout
+    def get_success_url(self):
+        return reverse_lazy('exercises-add', kwargs={'pk': self.object.id})
 
     #override form valid method and provide username
     def form_valid(self, form):
@@ -101,9 +104,17 @@ class WorkoutsCreateView(LoginRequiredMixin, CreateView):
 The update view with authorization check
 """
 class WorkoutsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Workouts
-    fields = ['WName', 'date']
-    success_url = '/home/' # redirect back to home page
+    form_class = WorkoutsForm
+    template_name = 'workouts/workouts_form.html'
+
+    #override get_queryset method so get specific workout we need to update
+    def get_queryset(self):
+        queryset = Workouts.objects.filter(pk=self.kwargs['pk'])
+        return queryset
+
+    #redirect user to their workout detail view
+    def get_success_url(self):
+        return reverse_lazy('workouts-detail', kwargs={'pk': self.kwargs['pk']})
 
     #override form valid method and provide username
     def form_valid(self, form):

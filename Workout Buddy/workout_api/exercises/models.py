@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from workouts.models import Workouts
 from django.urls import reverse
 
 class Exercises(models.Model):
     #django will auto generate a primary key id.
-    username = models.ForeignKey(User, on_delete=models.CASCADE) #delete workouts if user is deleted.
+    workout_id = models.ForeignKey(Workouts, default=None, on_delete=models.CASCADE) #delete exercise if workout it is associated with is deleted.
     date = models.DateField()
     exercise = models.CharField(max_length=50)
     sameWeight = models.BooleanField(default=False)
