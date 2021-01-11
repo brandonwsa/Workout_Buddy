@@ -2,18 +2,27 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-    <h1>Your most recent exercises: </h1> 
-    <a class="btn btn-secondary" href="{% url 'workouts' %}">Back to your workouts</a>
-    <br />
+        <h1>Your most recent exercises: </h1> 
 
-        {% for exercise in exercises %}
-            <h2>{{ exercise.exercise }}</h2>
-            <h2>{{ exercise.date|date:"m d, Y" }}</h2>
-            <h2>Same weight? {{ exercise.sameWeight }}</h2>
-            <h2>Volume: {{ exercise.totalVolume }}</h2>
-            <br />
-            <!-- add link to list of exercises per workout here -->
-        {% endfor %}
+        {% if exercises.0 is None %}
+            <h2>Add some exercises!</h2>
+            <a class="btn btn-secondary" href="{% url 'workouts' %}">Back to workouts</a>
+            <a class="btn btn-secondary" href="new/">Add exercise</a>
+        {% else %}
+            {# If an exercise exists, will get the first exercise so we can get the workout_id to allow user to click back to that specific workout. #}
+            <a class="btn btn-secondary" href="{% url 'workouts-detail' exercises.0.workout_id.id %}">Back to workout</a>
+        {% endif %}
+        
+        <br />
+
+            {% for exercise in exercises %}
+                <h2><a href="{% url 'exercises-detail' exercise.workout_id.id exercise.id %}">{{ exercise.exercise }}</a></h2>
+                <h2>{{ exercise.date|date:"m d, Y" }}</h2>
+                <h2>Same weight? {{ exercise.sameWeight }}</h2>
+                <h2>Volume: {{ exercise.totalVolume }}</h2>
+                <br />
+                <!-- add link to list of exercises per workout here -->
+            {% endfor %}
 
     {% else %}
         <h2>Login to view or edit your workouts</h2>

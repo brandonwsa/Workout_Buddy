@@ -104,9 +104,17 @@ class WorkoutsCreateView(LoginRequiredMixin, CreateView):
 The update view with authorization check
 """
 class WorkoutsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Workouts
-    fields = ['WName', 'date']
-    success_url = '/home/' # redirect back to home page
+    form_class = WorkoutsForm
+    template_name = 'workouts/workouts_form.html'
+
+    #override get_queryset method so get specific workout we need to update
+    def get_queryset(self):
+        queryset = Workouts.objects.filter(pk=self.kwargs['pk'])
+        return queryset
+
+    #redirect user to their workout detail view
+    def get_success_url(self):
+        return reverse_lazy('workouts-detail', kwargs={'pk': self.kwargs['pk']})
 
     #override form valid method and provide username
     def form_valid(self, form):

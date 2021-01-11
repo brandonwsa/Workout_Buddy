@@ -24,7 +24,7 @@ When doing the 'add your results to an existing workout plan' on home page, make
 	all your workouts and select one
 Should also have workout name be included in exercises table as well.
 Make a visual display for user to see their exercises being added to table in exercises/new
-make CRUD for exercise app
+make CRUD for exercise app - DONE
 When deleting workout, delete all exercises associated with it. Need to CASCAD a WID in exercise model possibly for this
 make exercisedetails app
 make CRUD for exervisedetails app
