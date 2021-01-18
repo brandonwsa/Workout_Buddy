@@ -27,17 +27,31 @@ Make a visual display for user to see their exercises being added to table in ex
 make CRUD for exercise app - DONE
 When deleting workout, delete all exercises associated with it. Need to CASCAD a WID in exercise model possibly for this
 make exercisedetails app
-make CRUD for exervisedetails app
+able to create new exercisedetails successfully -ALMOST DONE, get volume transfer to associated exercise working
+make CRUD for exercisedetails app
 Create custom API urls with slugs
 Create back to home button on API page
 add try excepts, be sure to add logs when doing this
+
+be able to create details when making exercise - DONE
+get volume for exercise to appear - DONE
+move workoutExercisesListView to exercises app
+when deleting exercise details, make sure to remove its volume from the exercise it is associated with
+have date update with workouts when updating in exercises. 
 
 POSSIBLE ISSUES:
 	we are able to make a duplicate exercise with same name and date and checkbox cause of id being pk in Exercises
 
 KNOWN ISSUES:
+FIXED - When trying to view API page for exercisedetails, getting improperlyconfigured exception. Tried fixing, no luck so far.
+	It is mainly because the view for the exercise the exercisedetails is associated with is unable to be made properly
+	The api page works when we remove the workout_id from the serializer field
+	FIXED BY USING, exercise_id in exercisedetails serializer as exercisesserializer instead of a url.
+		can also use CharField(read_only=True) to just get the name of the exercise instead as well.
 FIXED - when including router urls to patternurls for api functionality to be used, when clicking on a workout to view its details
 	the user is directed to the api page for the workout details instead.
+
+
 
 Can either make a new workout for each entry of your day, or select existing workout and add exercises to it.
 	can order and get results by date if doing the later.
@@ -152,7 +166,7 @@ can probably just get the exercises based of of the workout PK if we make a fk i
 Wont need username info.
 --revised
 Exercises app table:
-id(pk)	wID(fk)		date		exercise	SameWeight(y/n)	totalVolume
+id(pk)	wID(fk)		date(dontneed)	exercise	SameWeight(y/n)	totalVolume
 1	1		12-2-20		benchpress	no		2940
 2	1		12-2-20		backsquat	no		.
 3	1		12-2-20		pullups		yes		.
@@ -169,13 +183,25 @@ id(pk)	wID(fk)		date		exercise	SameWeight(y/n)	totalVolume
 
 
 ExerciseDetails app table:
-id(pk)	eID(fk)	username(fk)		Date		EName		weight		setAmount	totalReps	volume
-1	1	brandon			12-2-20		benchpress	110		1		10		1100
-2	1	brandon			12-2-20		benchpress	115		2		16		1840
-.	.	.			.		.		.		.		.		.
-4	6	brandon			12-2-20		facepulls	42		3		30		1260
-.	.	.			.		.		.		.		.		.
-6	9	joe			12-4-20		bentoverrow	135		1		10		1350
-7	9	joe			12-4-20		bentoverrow	185		1		8		1480
-8	9	joe			12-4-20		bentoverrow	230		1		6		1380
-.	.	.			.		.		.		.		.		.
+id(pk)	eID(fk)	username(fk)(dontneed)	Date(dontneed)	EName(dontneed)		weight		setAmount	totalReps	volume
+1	1	brandon			12-2-20		benchpress		110		1		10		1100
+2	1	brandon			12-2-20		benchpress		115		2		16		1840
+.	.	.			.		.			.		.		.		.
+4	6	brandon			12-2-20		facepulls		42		3		30		1260
+.	.	.			.		.			.		.		.		.
+6	9	joe			12-4-20		bentoverrow		135		1		10		1350
+7	9	joe			12-4-20		bentoverrow		185		1		8		1480
+8	9	joe			12-4-20		bentoverrow		230		1		6		1380
+.	.	.			.		.			.		.		.		.
+
+revised:
+id(pk)	eID(fk)		weight		setAmount	totalReps	volume
+1	1		110		1		10		1100
+2	1		115		2		16		1840
+.	.		.		.		.		.
+4	6		42		3		30		1260
+.	.		.		.		.		.
+6	9		135		1		10		1350
+7	9		185		1		8		1480
+8	9		230		1		6		1380
+.	.		.		.		.		.

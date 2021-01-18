@@ -34,7 +34,9 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAdminUser' #DjangoModelPermissionsOrAnonReadOnly to allow any unauthenticated user to have read-only access to api
+        'rest_framework.permissions.AllowAny' 
+        #'rest_framework.permissions.IsAdminUser'
+        #'DjangoModelPermissionsOrAnonReadOnly' to allow any unauthenticated user to have read-only access to api
     ]
 }
 
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'workouts.apps.WorkoutsConfig',
     'exercises.apps.ExercisesConfig',
+    'exercisesdetails.apps.ExercisesDetailsConfig',
 ]
 
 #Uncomment to allow all domains

@@ -4,6 +4,9 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 #from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import viewsets
+from rest_framework.views import APIView
+from rest_framework import permissions
+from rest_framework.response import Response
 from .serializers import ExercisesSerializer
 from .forms import ExercisesForm
 from .models import Exercises
@@ -28,9 +31,9 @@ class ExercisesViewSet(viewsets.ModelViewSet):
    # queryset = Exercises.objects.all()
     serializer_class = ExercisesSerializer
 
-    #defining out own get_queryset method allows us to set a custom basename when routing.
+    #defining our own get_queryset method allows us to set a custom basename when routing.
     #This helps us seperate the API view from accidently popping up when user clicks to view their
-    #workout from their profile in the UI.
+    #exercise from their profile in the UI.
     def get_queryset(self):
         return Exercises.objects.all()
 
@@ -76,6 +79,36 @@ class ExercisesDetailView(UserPassesTestMixin, DetailView):
 
 
 """
+
+"""
+"""
+class ExerciseAPIDetailView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    #return the wanted exercise
+    def get(self, request, format=None):
+        exercise = Exercises.objects.all()
+
+        return Response(exercise)
+"""
+    #needed to override since this method default looks for pk_url_kwarg which was getting the workout pk instead of exercise pk
+    #which would create an 'No exercise found matching the query' error.
+    #We now supply a pk that is the correct pk of the exercise we are viewing, exercisepk from url.
+ #   def get_object(self, queryset=None):
+ #       return get_object_or_404(Exercises, pk=self.kwargs.get('exercisepk'))
+
+    # see if user trying to view execise details is user logged in.
+ #   def test_func(self):
+        #exercise = Exercises.objects.get(pk=self.kwargs['exercisepk'])
+ #       workout = Workouts.objects.get(pk=self.kwargs['pk'])
+        #workout = exercise.workout_id
+  #      if self.request.user == workout.username:
+  #          return True
+  #      else:
+  #          return False
+
+
+"""
 Exercises creation functionality.
 Allows user to add new exercises to the workout they just created.
 """
@@ -85,9 +118,9 @@ class ExercisesCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessag
     success_message = 'Exercise added to workout!'
 
 
-    #redirect user to add more exercises to the workout when user creates an exercise
+    #redirect user to add more exercise details to the workout when user creates an exercise
     def get_success_url(self):
-        return reverse_lazy('exercises-add', kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy('exercisesdetails-create', kwargs={'pk': self.kwargs['pk'], 'exercisepk': self.object.id})
 
     #override form valid method and provide the workout primary key
     def form_valid(self, form):

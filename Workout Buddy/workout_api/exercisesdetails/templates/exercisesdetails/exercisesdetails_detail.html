@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+    <h1>Exercise details: </h1> 
+    <a class="btn btn-secondary" href="{% url 'exercises-detail' object.exercise_id.workout_id.id object.exercise_id.id %}">Back to exercise</a>
+    <br />
+
+        <h2>{{ object.id }}</h2>
+        <h2>{{ object.exercise_id }}</h2>
+        <h2>weight: {{ object.weight }}</h2>
+        <h2>sets: {{ object.set_amount }}</h2>
+        <h2>reps: {{ object.total_reps }}</h2>
+        <h2>volume: {{ object.volume }}</h2>
+        <br />
+
+        {% if object.exercise_id.workout_id.username == user %}
+            <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercises-update' object.exercise_id.workout_id.id object.exercise_id.id %}">Update exercise</a>
+            <a class="btn btn-outline-danger" href="{% url 'exercises-delete' object.exercise_id.workout_id.id object.exercise_id.id %}">Delete exercise</a>
+        {% endif %}
+
+    {% else %}
+        <h2>Login to view or edit your workouts</h2>
+        <a href="{% url 'login' %}">Login</a>
+        <br />
+        <h2>Or register if you don't have an account to log into</h2>
+        <a href="{% url 'register' %}">Register now!</a>   
+    {% endif %}
+
+{% endblock content %}

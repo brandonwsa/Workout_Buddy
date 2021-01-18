@@ -35,6 +35,12 @@ from exercises.views import (
     ExercisesUpdateView,
     ExercisesDeleteView
 )
+from exercisesdetails import views as exercises_details_views
+from exercisesdetails.views import (
+    ExercisesDetailsListView,
+    ExercisesDetailsCreateView,
+    ExercisesDetailsDetailView
+)
 
 
 # router for the rest api to be displayed.
@@ -44,6 +50,7 @@ router.register(r'workouts_api', workouts_views.WorkoutsViewSet, basename='worko
                                                                                           #when clicking on their workout they want to view. This seperates the API view (which user shouldnt have access to) 
                                                                                           #from UI view.
 router.register(r'exercises_api', exercises_views.ExercisesViewSet, basename='exercises_api')
+router.register(r'exercises_details_api', exercises_details_views.ExercisesDetailsViewSet, basename='exercises_details_api')
 
 
 # Wire up our API using automatic URL routing.
@@ -59,17 +66,21 @@ urlpatterns = [
     path('about/', main_views.about, name='about'),
     path('contact/', main_views.contact, name='contact'),
     path('workouts/', WorkoutsListView.as_view(), name='workouts'),
-    path('workouts/<int:pk>/', WorkoutsDetailView.as_view(), name='workouts-detail'), #should auto route to workouts_details.html
+    path('workouts/<int:pk>/', WorkoutsDetailView.as_view(), name='workouts-detail'), #should auto route to workouts_detail.html
     path('workouts/new/', WorkoutsCreateView.as_view(), name='workouts-create'), #workouts_form.html is naming convention
     path('workouts/<int:pk>/update/', WorkoutsUpdateView.as_view(), name='workouts-update'), #auto routes to workouts_form
     path('workouts/<int:pk>/delete/', WorkoutsDeleteView.as_view(), name='workouts-delete'),
     path('workouts/<int:pk>/exercises/', main_views.WorkoutExercisesListView.as_view(), name='workout-exercises'), #use view from exercises.
 #    path('exercises/new/', ExercisesCreateView.as_view(), name='exercises-create'), #exercises_form.html is naming convention
     path('workouts/<int:pk>/exercises/new/', ExercisesCreateView.as_view(), name='exercises-add'), #exercises_form.html is naming convention
-    path('workouts/<int:pk>/exercises/<int:exercisepk>/', ExercisesDetailView.as_view(), name='exercises-detail'), #exercises_details.html is naming convention
+    path('workouts/<int:pk>/exercises/<int:exercisepk>/', ExercisesDetailView.as_view(), name='exercises-detail'), #exercises_detail.html is naming convention
     path('workouts/<int:pk>/exercises/<int:exercisepk>/update/', ExercisesUpdateView.as_view(), name='exercises-update'), #exercises_form.html is naming convention
     path('workouts/<int:pk>/exercises/<int:exercisepk>/delete/', ExercisesDeleteView.as_view(), name='exercises-delete'), #exercises_confirm_delete.html is naming convention
+    path('workouts/<int:pk>/exercises/<int:exercisepk>/details/', ExercisesDetailsListView.as_view(), name='exercise-exercisesdetails'),
+    path('workouts/<int:pk>/exercises/<int:exercisepk>/details/new/', ExercisesDetailsCreateView.as_view(), name='exercisesdetails-create'), #exercisesdetails_form.html is naming convention
+    path('workouts/<int:pk>/exercises/<int:exercisepk>/details/<int:exercisedetailpk>/', ExercisesDetailsDetailView.as_view(), name='exercisesdetails-detail'), #exercisesdetails_detail.html is naming convention
     path('api/', include(router.urls)), 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+#    path('api/exercises/<int:pk>/', exercises_views.ExerciseAPIDetailView.as_view(), name='exercises-api-view')
 ]
 

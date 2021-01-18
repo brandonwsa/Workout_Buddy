@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+    <h1>Your exercise details: </h1> 
+    <h3>Click on the exercise name to view more details and to update or delete the exercise detail.</h3> 
+    <br />
+
+        {% if exercisesdetails.0 is None %}
+            <h2>Add some exercise details!</h2>
+            <a class="btn btn-secondary" href="{% url 'workouts' %}">Back to workouts</a>
+            <a class="btn btn-secondary" href="new/">Add exercise details</a>
+        {% else %}
+            {# If an exercise details exists, will get the first exercise details so we can get the workout_id and exercise_id to allow user to click back to that specific exercise. #}
+            <a class="btn btn-secondary" href="{% url 'exercises-detail' exercisesdetails.0.exercise_id.workout_id.id exercisesdetails.0.exercise_id.id %}">Back to exercises</a>
+        {% endif %}
+        <br /><br />
+
+        {% for exercisedetails in exercisesdetails %}
+            <h2><a href="{% url 'exercisesdetails-detail' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">{{ exercisedetails.exercise_id }}</a></h2>
+            <h2>Weight: {{ exercisedetails.weight }}</h2>
+            <br />
+        {% endfor %}
+
+    {% else %}
+        <h2>Login to view or edit your workouts</h2>
+        <a href="{% url 'login' %}">Login</a>
+        <br />
+        <h2>Or register if you don't have an account to log into</h2>
+        <a href="{% url 'register' %}">Register now!</a>   
+    {% endif %}
+
+{% endblock content %}
