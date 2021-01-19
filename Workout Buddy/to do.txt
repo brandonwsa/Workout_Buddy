@@ -36,6 +36,8 @@ MAKE WEBSITE FUNCTIONALITY AND APPEARENCE BETTER FOR USER
 		in the content sections add the buttons associated with each app there instead of on details page
 	when clicking on a workout, have it display the exercises associated w/ the workout instead of workout details
 
+Do more testing with postman before implementing a React app
+
 be able to create details when making exercise - DONE
 get volume for exercise to appear - DONE
 move workoutExercisesListView to exercises app
