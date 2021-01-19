@@ -5,38 +5,41 @@ get apps created
 	need ExerciseDetails app
 	need main app
 	
-make serializers _DONE for workouts and users
-make models _DONE for workouts and users
+make serializers _DONE for workouts and users - DONE
+make models _DONE for workouts and users - DONE
 figureout timezone
 make functionalty of CRUD to workouts app - DONE for website functionality
 get it so other users cant see others workouts but their own - DONE
-replace WName in workout/new with 'Workout Name:'
+replace WName in workout/new with 'Workout_Name:'
 Make API page for workouts functionality - DONE
 	See KNWON ISSUES below - FIXED
 make api for workouts - DONE
 make workouts forms.py - DONE
-make exercise app
+make exercise app - DONE
 get exercises to appear for a specific workout - DONE
 make API for exercise app - DONE
-Get date to be autofilled in when creating exercise when coming from workout/new page or coming from workout/update page
+Get date to be autofilled in when creating exercise when coming from workout/new page or coming from workout/update page - DONE
 When doing the 'add your results to an existing workout plan' on home page, make it have you either select an existing workout
 	to edit and go from there to adding exercises, or have it redirect you to your workouts page where you can see
-	all your workouts and select one
-Should also have workout name be included in exercises table as well.
-Make a visual display for user to see their exercises being added to table in exercises/new
+	all your workouts and select one - DONE
+Make a visual display for user to see their exercises being added to table in exercises/new - DONE
 make CRUD for exercise app - DONE
-When deleting workout, delete all exercises associated with it. Need to CASCAD a WID in exercise model possibly for this
-make exercisedetails app
-able to create new exercisedetails successfully -ALMOST DONE, get volume transfer to associated exercise working
-make CRUD for exercisedetails app
+When deleting workout, delete all exercises associated with it. Need to CASCAD a WID in exercise model possibly for this - DONE
+make exercisedetails app - DONE
+able to create new exercisedetails successfully, get volume transfer to associated exercise working - DONE
+make CRUD for exercisedetails app - DONE
 Create custom API urls with slugs
 Create back to home button on API page
 add try excepts, be sure to add logs when doing this
+MAKE WEBSITE FUNCTIONALITY AND APPEARENCE BETTER FOR USER
+	put workouts, exercises, exercisedetails in a content section like the homepage
+		in the content sections add the buttons associated with each app there instead of on details page
+	when clicking on a workout, have it display the exercises associated w/ the workout instead of workout details
 
 be able to create details when making exercise - DONE
 get volume for exercise to appear - DONE
 move workoutExercisesListView to exercises app
-when deleting exercise details, make sure to remove its volume from the exercise it is associated with
+when deleting exercise details, make sure to remove its volume from the exercise it is associated with - DONE
 have date update with workouts when updating in exercises. 
 
 POSSIBLE ISSUES:

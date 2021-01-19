@@ -117,6 +117,13 @@ class ExercisesCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessag
     template_name = 'exercises/exercises_form.html'
     success_message = 'Exercise added to workout!'
 
+    #overrride method so we can add the workout_pk to the context data.
+    #Allows user to be redirected to their workout-exercises view when clicking 'Done' through the use of workout_pk
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        workout = Workouts.objects.get(pk=self.kwargs['pk'])
+        context["workout_pk"] = workout.pk
+        return context
 
     #redirect user to add more exercise details to the workout when user creates an exercise
     def get_success_url(self):

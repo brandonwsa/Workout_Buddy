@@ -38,8 +38,10 @@ from exercises.views import (
 from exercisesdetails import views as exercises_details_views
 from exercisesdetails.views import (
     ExercisesDetailsListView,
+    ExercisesDetailsDetailView,
     ExercisesDetailsCreateView,
-    ExercisesDetailsDetailView
+    ExercisesDetailsUpdateView,
+    ExercisesDetailsDeleteView
 )
 
 
@@ -79,6 +81,8 @@ urlpatterns = [
     path('workouts/<int:pk>/exercises/<int:exercisepk>/details/', ExercisesDetailsListView.as_view(), name='exercise-exercisesdetails'),
     path('workouts/<int:pk>/exercises/<int:exercisepk>/details/new/', ExercisesDetailsCreateView.as_view(), name='exercisesdetails-create'), #exercisesdetails_form.html is naming convention
     path('workouts/<int:pk>/exercises/<int:exercisepk>/details/<int:exercisedetailpk>/', ExercisesDetailsDetailView.as_view(), name='exercisesdetails-detail'), #exercisesdetails_detail.html is naming convention
+    path('workouts/<int:pk>/exercises/<int:exercisepk>/details/<int:exercisedetailpk>/update/', ExercisesDetailsUpdateView.as_view(), name='exercisesdetails-update'),
+    path('workouts/<int:pk>/exercises/<int:exercisepk>/details/<int:exercisedetailpk>/delete/', ExercisesDetailsDeleteView.as_view(), name='exercisesdetails-delete'),
     path('api/', include(router.urls)), 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 #    path('api/exercises/<int:pk>/', exercises_views.ExerciseAPIDetailView.as_view(), name='exercises-api-view')

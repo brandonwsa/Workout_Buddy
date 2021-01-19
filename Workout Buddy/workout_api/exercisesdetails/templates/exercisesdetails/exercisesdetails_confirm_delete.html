@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Exercise</legend>
+                <h2>Are you sure you want to delete the exercise details for exercise "{{ object.exercise_id.exercise }}"</h2>
+                <h4>Weight: {{ object.weight }}</h4>
+                <h4>Sets: {{ object.set_amount }}</h4>
+                <h4>Reps (per set): {{ object.total_reps }}</h4>
+                <h4>Volume: {{ object.volume }}</h4>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'exercisesdetails-detail' object.exercise_id.workout_id.id object.exercise_id.id object.id %}">No, cancel</a>
+            </div>
+        </form>
+
+
+    </div>
+{% endblock content %}

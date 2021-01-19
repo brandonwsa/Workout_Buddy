@@ -16,8 +16,8 @@
         <br />
 
         {% if object.exercise_id.workout_id.username == user %}
-            <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercises-update' object.exercise_id.workout_id.id object.exercise_id.id %}">Update exercise</a>
-            <a class="btn btn-outline-danger" href="{% url 'exercises-delete' object.exercise_id.workout_id.id object.exercise_id.id %}">Delete exercise</a>
+            <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercisesdetails-update' object.exercise_id.workout_id.id object.exercise_id.id object.id %}">Update details</a>
+            <a class="btn btn-outline-danger" href="{% url 'exercisesdetails-delete' object.exercise_id.workout_id.id object.exercise_id.id object.id %}">Delete details</a>
         {% endif %}
 
     {% else %}
