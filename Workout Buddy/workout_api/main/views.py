@@ -24,7 +24,7 @@ View to display exercises associated with workouts. Seperated from exercises app
 """
 class WorkoutExercisesListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Exercises
-    template_name = '/exercises/templates/exercises/exercises.html'
+    template_name = '/exercises/templates/exercises/exercises_list.html'
     context_object_name = 'exercises'
 
     #override queryset method from ListView to get signed in users exercises only

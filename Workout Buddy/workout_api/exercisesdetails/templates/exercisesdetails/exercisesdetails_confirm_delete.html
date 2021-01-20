@@ -13,7 +13,7 @@
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-danger" type="submit">Delete</button>
-                <a class="btn btn-outline-secondary" href="{% url 'exercisesdetails-detail' object.exercise_id.workout_id.id object.exercise_id.id object.id %}">No, cancel</a>
+                <a class="btn btn-outline-secondary" href="{% url 'exercise-exercisesdetails' object.exercise_id.workout_id.id object.exercise_id.id %}">No, cancel</a>
             </div>
         </form>
 

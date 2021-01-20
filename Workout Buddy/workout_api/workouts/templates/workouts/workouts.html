@@ -4,13 +4,19 @@
     {% if user.is_authenticated %}
     <h1>Your most recent workouts: </h1> 
     <a class="btn btn-secondary" href="{% url 'profile' %}">back to profile</a>
-    <br />
+    <br /><br />
 
         {% for workout in workouts %}
-            <h2><a href="{% url 'workouts-detail' workout.id %}">{{ workout.WName }}</a></h2>
-            <h2>{{ workout.date|date:"m d, Y" }}</h2>
-            <br />
-            <!-- add link to list of exercises per workout here -->
+            <div class="content-section">
+                <h2><a href="{% url 'workouts-detail' workout.id %}">{{ workout.WName }}</a></h2>
+                <h2>{{ workout.date|date:"m d, Y" }}</h2>
+                <!-- buttons -->
+                <a class="btn btn-primary mt-1 mb-1" href="{% url 'workout-exercises' workout.id %}">View Exercises</a>
+                <a class="btn btn-primary mt-1 mb-1" href="{% url 'exercises-add' workout.id %}">Add Exercises</a>
+                <br />
+                <a class="btn btn-secondary mt-1 mb-1" href="{% url 'workouts-update' workout.id %}">Update workout</a>
+                <a class="btn btn-outline-danger" href="{% url 'workouts-delete' workout.id %}">Delete workout</a>
+            </div>
         {% endfor %}
 
     {% else %}

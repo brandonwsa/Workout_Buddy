@@ -114,7 +114,7 @@ class WorkoutsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     #redirect user to their workout detail view
     def get_success_url(self):
-        return reverse_lazy('workouts-detail', kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy('workouts')
 
     #override form valid method and provide username
     def form_valid(self, form):

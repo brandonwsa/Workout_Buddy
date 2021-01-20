@@ -168,7 +168,7 @@ class ExercisesUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     #redirect user back to their exercise view for that workout
     def get_success_url(self):
-        return reverse_lazy('exercises-detail', kwargs={'pk': self.kwargs['pk'], 'exercisepk': self.kwargs['exercisepk']})
+        return reverse_lazy('workout-exercises', kwargs={'pk': self.kwargs['pk']})
 
     #override form valid method and provide the workout primary key
     def form_valid(self, form):
