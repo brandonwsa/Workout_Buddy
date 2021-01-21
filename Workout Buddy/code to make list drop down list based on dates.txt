@@ -1,0 +1,36 @@
+		<div class="dropdown float-right">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Date
+                        <span class="caret"></span>
+                    </button>
+
+                    <!--list of dates to select from-->
+                    <ul class="dropdown-menu" id="datelist">
+
+                        <!--load jquery-->
+                        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+                        <!--js function to check if exercise date is already in the list of dates to pick from-->
+                        <script>
+                            function checkForDate(date) {
+                                let found = false;
+
+                                $("#datelist li").each((id, elem) => {
+                                    if (elem.innerText == date) {
+                                        found = true;
+                                    }
+                                });
+
+                                return found;
+                            }
+                        </script>
+
+                        <!--put exercises dates in list, that are not already in list-->
+                        {% for exercise in exercises %}
+                            <script>
+                                if (checkForDate("{{exercise.date}}") == false){
+                                    document.write("<li><a href='{% url 'exercises-detail' exercise.workout_id.id exercise.id %}'>{{exercise.date}}</a></li>")
+                                }
+                            </script> 
+                        {% endfor %}
+                    </ul>
+                </div>

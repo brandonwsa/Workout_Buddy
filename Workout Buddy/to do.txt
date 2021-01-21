@@ -32,12 +32,15 @@ Create custom API urls with slugs
 Create back to home button on API page
 add try excepts, be sure to add logs when doing this
 MAKE WEBSITE FUNCTIONALITY AND APPEARENCE BETTER FOR USER
-	put workouts, exercises, exercisedetails in a content section like the homepage
-		in the content sections add the buttons associated with each app there instead of on details page
-	when clicking on a workout, have it display the exercises associated w/ the workout instead of workout details
+	put workouts, exercises, exercisedetails in a content section like the homepage - DONE
+		in the content sections add the buttons associated with each app there instead of on details page - DONE
+	when clicking on a workout, have it display the exercises associated w/ the workout instead of workout details - DONE
+	Have drop down box for exercises view to view exercises by date - Dont think really needed w/ how web app is made
+		may be able to apply this to workouts tho, with a drop down based on name
+	add pagnation based on date for exercises
 make workoutexercises into its own app and not in Main app
 make a button to view workout statistics
-	calc average weight used for exercise and reps and sets
+	calc average weight used for exercise and reps and sets, can be based off of date of exercises in the workout
 
 Do more testing with postman before implementing a React app
 

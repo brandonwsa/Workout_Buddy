@@ -18,13 +18,16 @@
 
         {% for exercisedetails in exercisesdetails %}
             <div class="content-section">
-                <h2><a href="{% url 'exercisesdetails-detail' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">{{ exercisedetails.exercise_id }}</a></h2>
-                <h2>Weight: {{ exercisedetails.weight }}</h2>
-                <h2>Sets: {{ exercisedetails.set_amount }}</h2>
-                <h2>Reps (per set): {{ exercisedetails.total_reps }}</h2>
-                <h2>Volume: {{ exercisedetails.volume }}</h2>
-                <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercisesdetails-update' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">Update details</a>
-                <a class="btn btn-outline-danger" href="{% url 'exercisesdetails-delete' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">Delete details</a>
+                <h4>Weight: {{ exercisedetails.weight }}</h4>
+                <h4>Sets: {{ exercisedetails.set_amount }}</h4>
+                <h4>Reps (per set): {{ exercisedetails.total_reps }}</h4>
+                <h4>Volume: {{ exercisedetails.volume }}
+                    <div class="float-right">
+                        <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercisesdetails-update' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">Update details</a>
+                        <a class="btn btn-outline-danger" href="{% url 'exercisesdetails-delete' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">Delete details</a>
+                    </div>
+                </h4>
+                
             </div>
         {% endfor %}
 

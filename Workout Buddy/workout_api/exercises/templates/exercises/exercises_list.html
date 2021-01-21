@@ -11,30 +11,39 @@
         {% else %}
             {# If an exercise exists, will get the first exercise so we can get the workout_id to allow user to click back to that specific workout. #}
           {#  <a class="btn btn-secondary" href="{% url 'workouts-detail' exercises.0.workout_id.id %}">Back to workout</a> #}
-          <a class="btn btn-secondary" href="{% url 'workouts' %}">Back to workouts</a>
-        {% endif %}
-        
-        <br /><br />
+            <h2><a class="btn btn-secondary" href="{% url 'workouts' %}">Back to workouts</a></h2>
+            <br /><br />
 
             {% for exercise in exercises %}
                 <div class="content-section">
-                    <h2><a href="{% url 'exercises-detail' exercise.workout_id.id exercise.id %}">{{ exercise.exercise }}</a></h2>
-                    <h2>{{ exercise.date|date:"m d, Y" }}</h2>
-                    <h2>Same weight for all sets? {% if exercise.sameWeight is True %}
+                    <h2>{{ exercise.exercise }}
+                        <div class="float-right">
+                            <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercise-exercisesdetails' exercise.workout_id.id exercise.id %}">View Details</a>
+                            <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercisesdetails-create' exercise.workout_id.id exercise.id %}">Add Details</a></a>
+                        </div>
+                    </h2>
+                    <br />
+                    <h4>{{ exercise.date|date:"m d, Y" }}</h4>
+                    <h4>Same weight for all sets? {% if exercise.sameWeight is True %}
                                         Yes
                                      {% else %}
                                         No
                                     {% endif %}
-                    </h2>
-                    <h2>Total Volume: {{ exercise.totalVolume }}</h2>
-                    <a class="btn btn-primary mt-1 mb-1" href="{% url 'exercise-exercisesdetails' exercise.workout_id.id exercise.id %}">View Details</a>
-                    <a class="btn btn-primary mt-1 mb-1" href="{% url 'exercisesdetails-create' exercise.workout_id.id exercise.id %}">Add Details</a>
-                    <br />
-                    <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercises-update' exercise.workout_id.id exercise.id %}">Update Exercise</a>
-                    <a class="btn btn-outline-danger" href="{% url 'exercises-delete' exercise.workout_id.id exercise.id %}">Delete Exercise</a>
+                    </h4>
+                    <h4>Total Volume: {{ exercise.totalVolume }}
+                        <div class="float-right">
+                            <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercises-update' exercise.workout_id.id exercise.id %}">Update Exercise</a>
+                            <a class="btn btn-outline-danger" href="{% url 'exercises-delete' exercise.workout_id.id exercise.id %}">Delete Exercise</a>
+                        </div>
+                    </h4>
+                    
                 </div>
                 <!-- add link to list of exercises per workout here -->
             {% endfor %}
+
+        {% endif %}
+        
+        
 
     {% else %}
         <h2>Login to view or edit your workouts</h2>
