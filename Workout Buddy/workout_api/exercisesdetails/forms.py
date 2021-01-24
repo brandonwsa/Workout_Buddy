@@ -27,7 +27,7 @@ class ExercisesDetailsForm(forms.ModelForm):
         help_texts = {
             "weight": _('Enter the amount of weight you did.'),
             "set_amount": _('How many sets did you do with this weight?'),
-            "total_reps": _('How many total reps did you do for each set? If you did different number of reps for the sets, add each set individually then'),
+            "total_reps": _('How many reps did you do in each set? If you did different number of reps for some sets, add each set individually that has a different number of reps.'),
         }
 
         #custom error messages

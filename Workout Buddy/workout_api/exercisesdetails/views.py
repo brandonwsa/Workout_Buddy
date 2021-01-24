@@ -147,7 +147,8 @@ Allow user to update the exercise details, weight, set amount, and total reps.
 """
 class ExercisesDetailsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ExercisesDetails
-    fields = ['weight', 'set_amount', 'total_reps']
+    form_class = ExercisesDetailsForm
+    #fields = ['weight', 'set_amount', 'total_reps']
 
     #needed to override since this method default looks for pk_url_kwarg which was getting the workout pk instead of exercise details pk
     #which would create an 'No exercisedetails found matching the query' error.
@@ -238,7 +239,3 @@ class ExercisesDetailsDeleteView(LoginRequiredMixin, UserPassesTestMixin, Delete
         else:
             return False
 
-
-
-
-#will have to subtrct volume off of exer.totalVolume when deleting an exercise detail.

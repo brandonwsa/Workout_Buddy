@@ -16,27 +16,39 @@
 
             {% for exercise in exercises %}
                 <div class="content-section">
-                    <h2>{{ exercise.exercise }}
-                        <div class="float-right">
+                    <!--If user is not on mobile, display buttons on top of text and aligned to the right.-->
+                    {% if not request.user_agent.is_mobile %}
+                        <div class="button-section float-right">
                             <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercise-exercisesdetails' exercise.workout_id.id exercise.id %}">View Details</a>
-                            <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercisesdetails-create' exercise.workout_id.id exercise.id %}">Add Details</a></a>
-                        </div>
-                    </h2>
-                    <br />
-                    <h4>{{ exercise.date|date:"m d, Y" }}</h4>
-                    <h4>Same weight for all sets? {% if exercise.sameWeight is True %}
-                                        Yes
-                                     {% else %}
-                                        No
-                                    {% endif %}
-                    </h4>
-                    <h4>Total Volume: {{ exercise.totalVolume }}
-                        <div class="float-right">
+                            <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercisesdetails-create' exercise.workout_id.id exercise.id %}">Add Details</a>
                             <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercises-update' exercise.workout_id.id exercise.id %}">Update Exercise</a>
                             <a class="btn btn-outline-danger" href="{% url 'exercises-delete' exercise.workout_id.id exercise.id %}">Delete Exercise</a>
                         </div>
-                    </h4>
-                    
+                        <h2>{{ exercise.exercise }}</h2>
+                        <br />
+                        <h4>Same weight for all sets? {% if exercise.sameWeight is True %}
+                                            Yes
+                                        {% else %}
+                                            No
+                                        {% endif %}
+                        </h4>
+                        <h4>Total Volume: {{ exercise.totalVolume }}</h4>
+                    <!-- if user is on mobile, display buttons below text in content section-->    
+                    {% else %}
+                        <h2>{{ exercise.exercise }}</h2>
+                        <br />
+                        <h4>Same weight for all sets? {% if exercise.sameWeight is True %}
+                                            Yes
+                                        {% else %}
+                                            No
+                                        {% endif %}
+                        </h4>
+                        <h4>Total Volume: {{ exercise.totalVolume }}</h4>
+                        <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercise-exercisesdetails' exercise.workout_id.id exercise.id %}">View Details</a>
+                        <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercisesdetails-create' exercise.workout_id.id exercise.id %}">Add Details</a>
+                        <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercises-update' exercise.workout_id.id exercise.id %}">Update Exercise</a>
+                        <a class="btn btn-outline-danger" href="{% url 'exercises-delete' exercise.workout_id.id exercise.id %}">Delete Exercise</a>
+                    {% endif %}    
                 </div>
                 <!-- add link to list of exercises per workout here -->
             {% endfor %}

@@ -67,6 +67,13 @@ body {
   .site-header .navbar-nav .nav-link.active {
     font-weight: 500;
   }
+
+  .button-section {
+    background: #202020;
+    padding: 10px 20px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
   
   .content-section {
     background: #202020;

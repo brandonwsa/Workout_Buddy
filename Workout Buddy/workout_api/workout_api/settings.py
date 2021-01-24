@@ -25,7 +25,12 @@ SECRET_KEY = 'sf1i)mng2l%vo6i@3h(^%pxph7sv+ck5o8^r$ay=(98$ogu58l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#added phone host
+ALLOWED_HOSTS = [
+    '192.168.0.21',
+    '192.168.0.20',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -55,7 +60,19 @@ INSTALLED_APPS = [
     'workouts.apps.WorkoutsConfig',
     'exercises.apps.ExercisesConfig',
     'exercisesdetails.apps.ExercisesDetailsConfig',
+    'django_user_agents',
 ]
+
+# Cache backend is optional, but recommended to speed up user agent parsing
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211'
+    }
+}
+
+#Name of cache backend to cache user agents. If it not specified default cache alias will be used. Set to 'None' to disable caching.
+USER_AGENTS_CACHE = 'default'
 
 #Uncomment to allow all domains
 """CORS_ORIGIN_ALLOW_ALL = True"""
@@ -65,6 +82,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

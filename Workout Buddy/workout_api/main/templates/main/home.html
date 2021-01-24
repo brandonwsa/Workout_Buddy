@@ -11,14 +11,14 @@
 
         <div class="content-section">
             <!--Create a workout-->
-            <h3>Create a new workout plan:</h3>
-            <a class="btn btn-primary" href="{% url 'workouts-create' %}">Create a new workout</a>
+            <h3>Create and save workout details:</h3>
+            <a class="btn btn-secondary" href="{% url 'workouts-create' %}">Create a new workout</a>
         </div>
 
         <div class="content-section">
             <!--Add exercises to existing workout-->
-            <h3>Add your exercise results to an existing workout plan:</h3>
-            <a class="btn btn-primary" href="{% url 'workouts' %}">Add exercises to workout</a>
+            <h3>View existing workouts:</h3>
+            <a class="btn btn-secondary" href="{% url 'workouts' %}">View workouts</a>
         </div>
 
     {% else %}

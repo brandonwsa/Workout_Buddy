@@ -41,6 +41,7 @@ MAKE WEBSITE FUNCTIONALITY AND APPEARENCE BETTER FOR USER
 make workoutexercises into its own app and not in Main app
 make a button to view workout statistics
 	calc average weight used for exercise and reps and sets, can be based off of date of exercises in the workout
+	show weights, volume, sets, reps used for each exercise in chart form
 
 Do more testing with postman before implementing a React app
 

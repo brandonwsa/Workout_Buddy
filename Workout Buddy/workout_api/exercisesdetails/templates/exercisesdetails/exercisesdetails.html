@@ -18,15 +18,26 @@
 
         {% for exercisedetails in exercisesdetails %}
             <div class="content-section">
-                <h4>Weight: {{ exercisedetails.weight }}</h4>
-                <h4>Sets: {{ exercisedetails.set_amount }}</h4>
-                <h4>Reps (per set): {{ exercisedetails.total_reps }}</h4>
-                <h4>Volume: {{ exercisedetails.volume }}
-                    <div class="float-right">
+                <!--If user is not on mobile, display buttons on top of text and aligned to the right.-->
+                {% if not request.user_agent.is_mobile %}
+                    <div class="button-section float-right">
                         <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercisesdetails-update' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">Update details</a>
                         <a class="btn btn-outline-danger" href="{% url 'exercisesdetails-delete' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">Delete details</a>
                     </div>
-                </h4>
+                    <h4>Weight: {{ exercisedetails.weight }}</h4>
+                    <h4>Sets: {{ exercisedetails.set_amount }}</h4>
+                    <h4>Reps (per set): {{ exercisedetails.total_reps }}</h4>
+                    <h4>Volume: {{ exercisedetails.volume }} </h4>
+                <!--If user is on mobile, display buttons below text.-->
+                {% else %}
+                    <h4>Weight: {{ exercisedetails.weight }}</h4>
+                    <h4>Sets: {{ exercisedetails.set_amount }}</h4>
+                    <h4>Reps (per set): {{ exercisedetails.total_reps }}</h4>
+                    <h4>Volume: {{ exercisedetails.volume }} </h4>
+                    <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercisesdetails-update' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">Update details</a>
+                    <a class="btn btn-outline-danger" href="{% url 'exercisesdetails-delete' exercisedetails.exercise_id.workout_id.id exercisedetails.exercise_id.id exercisedetails.id %}">Delete details</a>
+                {% endif %}
+                
                 
             </div>
         {% endfor %}

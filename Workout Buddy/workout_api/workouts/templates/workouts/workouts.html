@@ -8,20 +8,27 @@
 
         {% for workout in workouts %}
             <div class="content-section">
-                <h2>{{ workout.WName }}
-                    <div class="float-right">
+                <!--If user is not on mobile, display buttons on top of text and aligned to the right.-->
+                {% if not request.user_agent.is_mobile %}
+                    <div class="button-section float-right">
                         <a class="btn btn-secondary mt-1 mb-1" href="{% url 'workout-exercises' workout.id %}">View Exercises</a>
                         <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercises-add' workout.id %}">Add Exercises</a>
-                    </div>
-                </h2>
-                <br />
-                <h4>{{ workout.date|date:"m d, Y" }}
-                    <div class="float-right">
                         <a class="btn btn-secondary mt-1 mb-1" href="{% url 'workouts-update' workout.id %}">Update workout</a>
                         <a class="btn btn-outline-danger" href="{% url 'workouts-delete' workout.id %}">Delete workout</a>
                     </div>
-                </h4>
-                <!-- buttons -->
+                    <h2>{{ workout.WName }}  </h2>
+                    <br />
+                    <h4>{{ workout.date|date:"m d, Y" }}</h4>
+                <!--If user is on mobile, display buttons below text.-->
+                {% else %}
+                    <h2>{{ workout.WName }}  </h2>
+                    <br />
+                    <h4>{{ workout.date|date:"m d, Y" }}</h4>
+                    <a class="btn btn-secondary mt-1 mb-1" href="{% url 'workout-exercises' workout.id %}">View Exercises</a>
+                    <a class="btn btn-secondary mt-1 mb-1" href="{% url 'exercises-add' workout.id %}">Add Exercises</a>
+                    <a class="btn btn-secondary mt-1 mb-1" href="{% url 'workouts-update' workout.id %}">Update workout</a>
+                    <a class="btn btn-outline-danger" href="{% url 'workouts-delete' workout.id %}">Delete workout</a>
+                {% endif %}
                 
             </div>
         {% endfor %}
