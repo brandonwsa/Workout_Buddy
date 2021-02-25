@@ -51,6 +51,9 @@ move workoutExercisesListView to exercises app
 when deleting exercise details, make sure to remove its volume from the exercise it is associated with - DONE
 have date update with workouts when updating in exercises. 
 
+be able to change password from profile page - DONE
+Be able to reset password if can't login
+
 POSSIBLE ISSUES:
 	we are able to make a duplicate exercise with same name and date and checkbox cause of id being pk in Exercises
 
