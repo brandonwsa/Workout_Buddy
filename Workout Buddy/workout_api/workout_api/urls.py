@@ -63,6 +63,8 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('change-password/', auth_views.PasswordChangeView.as_view(), name='change-password'), #Make template
+    path('password-change-done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'), #Make template
     #path('home/', main_views.home, name='home'),
     path('', main_views.home, name='home'),
     path('about/', main_views.about, name='about'),

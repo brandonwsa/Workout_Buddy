@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
-#from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import viewsets
 from .serializers import ExercisesDetailsSerializer
 from .forms import ExercisesDetailsForm
@@ -222,7 +222,7 @@ class ExercisesDetailsDeleteView(LoginRequiredMixin, UserPassesTestMixin, Delete
             #remove the volume from total volume.
             currentVolume = ExercisesDetails.objects.get(pk=kwargs['exercisedetailpk']).volume
             Exercises.objects.filter(pk=exercise.pk).update(totalVolume=exercise.totalVolume - currentVolume)
-        except:
+        except ObjectDoesNotExist:
             return super().delete(request, *args, **kwargs)
 
         #call original method to handle the actual deletion portion of the exercisedetails object.
