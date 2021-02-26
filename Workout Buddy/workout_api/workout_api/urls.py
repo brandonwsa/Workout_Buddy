@@ -63,8 +63,12 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-    path('change-password/', auth_views.PasswordChangeView.as_view(template_name='users/change_password.html'), name='change-password'), #Make template
-    path('password-change-done/', auth_views.PasswordChangeDoneView.as_view(template_name='users/change_password_done.html'), name='password_change_done'), #Make template
+    path('password/change/', auth_views.PasswordChangeView.as_view(template_name='users/change_password.html'), name='change-password'),
+    path('password/change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='users/change_password_done.html'), name='password_change_done'),
+    path('password/reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html', email_template_name='users/password_reset_email.html'), name='password-reset'),
+    path('password/reset/confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password/reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), name='password_reset_done'),
+    path('password/reset/complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
     #path('home/', main_views.home, name='home'),
     path('', main_views.home, name='home'),
     path('about/', main_views.about, name='about'),

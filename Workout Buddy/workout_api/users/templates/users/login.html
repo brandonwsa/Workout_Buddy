@@ -7,9 +7,11 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Login</legend>
                 {{ form|crispy }} <!-- displays form labels and fields and uses cripsy for formatting-->
+                
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Login</button>
+                <small class="float-right">Forgot password? <a href="{% url 'password-reset' %}">Reset password</a></small>
             </div>
         </form>
 
