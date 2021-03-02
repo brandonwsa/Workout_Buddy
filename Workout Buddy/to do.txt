@@ -57,6 +57,8 @@ Be able to reset password if can't login - DONE
 large numbers not notified properly when entering them in form
 make only 3 login attempts
 
+make favicon
+
 Finish setting up project for deployment on linux based server.
 
 POSSIBLE ISSUES:
