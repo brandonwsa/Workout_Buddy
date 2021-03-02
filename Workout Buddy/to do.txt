@@ -54,6 +54,9 @@ have date update with workouts when updating in exercises.
 be able to change password from profile page - DONE
 Be able to reset password if can't login - DONE
 
+large numbers not notified properly when entering them in form
+make only 3 login attempts
+
 Finish setting up project for deployment on linux based server.
 
 POSSIBLE ISSUES:
