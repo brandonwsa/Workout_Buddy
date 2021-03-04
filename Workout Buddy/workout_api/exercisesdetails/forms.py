@@ -33,12 +33,12 @@ class ExercisesDetailsForm(forms.ModelForm):
         #custom error messages
         error_messages = {
             "weight": {
-                'max_value': _('That is a lot of weight! Please enter a number smaller you super human.'),
+                'max_value': _('That is a lot of weight! Please enter a number smaller than 20,000 you super human.'),
             },
             "set_amount": {
-                'max_value': _('That is a lot of sets! Please enter a number smaller you super human.'),
+                'max_value': _('That is a lot of sets! Please enter a number smaller than 200 you super human.'),
             },
             "total_reps": {
-                'max_value': _('That is a lot of reps! Please enter a number smaller you super human.'),
+                'max_value': _('That is a lot of reps! Please enter a number smaller than 500 you super human.'),
             },
         }

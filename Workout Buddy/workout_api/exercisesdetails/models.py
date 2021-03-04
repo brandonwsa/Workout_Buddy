@@ -1,13 +1,14 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from exercises.models import Exercises
 from django.urls import reverse
 
 class ExercisesDetails(models.Model):
     #django will auto generate a primary key id.
     exercise_id = models.ForeignKey(Exercises, default=None, on_delete=models.CASCADE) #delete exercise details if exercise it is associated with is deleted.
-    weight = models.IntegerField()
-    set_amount = models.IntegerField()
-    total_reps = models.IntegerField()
+    weight = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(20000)])
+    set_amount = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(200)])
+    total_reps = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(500)])
     volume = models.IntegerField(default=0) #is able to be null or blank. Will be auto filled in by after exercises details are inputted.
                                                         #need to make default: 0
 
