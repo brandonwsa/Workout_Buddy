@@ -54,8 +54,9 @@ have date update with workouts when updating in exercises.
 be able to change password from profile page - DONE
 Be able to reset password if can't login - DONE
 
-large numbers not notified properly when entering them in form
+large numbers not notified properly when entering them in form - DONE
 make only 3 login attempts
+add calendar
 
 make favicon
 
