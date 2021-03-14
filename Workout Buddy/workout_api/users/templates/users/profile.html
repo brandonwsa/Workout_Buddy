@@ -3,24 +3,16 @@
 {% block content %}
     <h1>Hello {{ user.username }}</h1>
     <br />
-    <div>
+    <div class="content-section">
         <h2>Your workouts:</h2>
         <a class="btn btn-secondary" href="{% url 'workouts' %}">View workouts</a>
     </div>
 
-    <br /><br />
-    
-    <div>
-        <h2>Exercise Statistics:</h2>
-        <h4>Coming Soon!</h4>
-    </div>
 
-    <br /><br />
-
-    <div>
-
-    </div>
+    <div class="content-section">
         <h2>Change Password:</h2>
         <a class="btn btn-danger" href="{% url 'change-password' %}">Change Password</a>
+    </div>
+        
     <br />
 {% endblock content %}
